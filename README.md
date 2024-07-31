@@ -7,7 +7,18 @@ if u check error, plz report me!!
 - get, post
 - send data
 
-## index 2 (Day2))
+## index 2 (Day2)
 - login
 - register
 - logout
+
+
+## index 3
+- session
+- reset session
+- file upload url
+
+- jwt
+- file download
+- logging setting
+

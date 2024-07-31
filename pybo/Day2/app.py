@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import timedelta
+from flask_jwt_extended import *
 
 app = Flask(__name__)
 app.secret_key = 'ul88_babo'
+app.permanent_session_lifetime = timedelta(minutes=5) # 5분마다 세션 초기화
 
 # In-memory user database
 users = {}
@@ -19,6 +22,7 @@ def login():
         user = users.get(username)
 
         if user and check_password_hash(user['password'], password):
+            session.permanent = True # 세션 추가
             session['username'] = username
             flash('Login successful!', 'success')
             return redirect(url_for('index'))
@@ -46,6 +50,11 @@ def logout():
     session.pop('username', None)
     flash('You have been logged out', 'success')
     return redirect(url_for('index'))
+
+@app.route('/file_upload',  methods=['GET', 'POST'])
+def file_upload():
+    return render_template('file_upload.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
