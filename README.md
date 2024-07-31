@@ -7,4 +7,7 @@ if u check error, plz report me!!
 - get, post
 - send data
 
-## index 2
+## index 2 (Day2))
+- login
+- register
+- logout
