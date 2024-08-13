@@ -11,9 +11,15 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg'}
 app = Flask(__name__)
 app.secret_key = 'ul88_babo'
 app.permanent_session_lifetime = timedelta(minutes=5) # 5분마다 세션 초기화
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 # In-memory user database
 users = {}
+
+def allowed_file(filename): # 파일 화이트 리스트 필터링
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def index():
